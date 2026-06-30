@@ -1,5 +1,5 @@
 from pathlib import Path
-from llm import ask
+from llm.openai_provider import ask
 
 class BaseAgent:
     
