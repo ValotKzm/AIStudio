@@ -6,7 +6,7 @@ developer = Developer()
 manager = Manager()
 tester = Tester()
 
-task = input("What would you like to do?")
+task = input("What would you like to do? ")
 
 print("\n--- MANAGER ---\n")
 plan = manager.run(task)
