@@ -1,0 +1,21 @@
+from openai import OpenAI
+from config import OPENAI_API_KEY, MODEL
+
+client = OpenAI(api_key=OPENAI_API_KEY)
+
+def ask(system_prompt: str, user_prompt: str):
+    response = client.chat.compretions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": system_prompt
+            },
+            {
+                "role": "user",
+                "content": user_prompt
+            }
+        ]
+    )
+    
+    return response.choices[0].message.content
