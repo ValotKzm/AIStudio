@@ -12,6 +12,10 @@ print("\n--- MANAGER ---\n")
 plan = manager.run(task)
 print(plan)
 
+if plan == "The AI could not generate a response.":
+    print("\nStopping workflow.")
+    exit()
+
 print("\n--- DEVELOPER ---\n")
 code = developer.run(plan)
 print(code)
