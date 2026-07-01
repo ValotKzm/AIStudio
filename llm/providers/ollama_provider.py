@@ -6,7 +6,7 @@ from llm.base import BaseProvider
 
 class OllamaProvider(BaseProvider):
 
-    def ask(system_prompt: str, user_prompt: str) -> str:
+    def ask(self, system_prompt: str, user_prompt: str) -> str:
 
         try:
 
