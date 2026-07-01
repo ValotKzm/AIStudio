@@ -1,17 +1,20 @@
 from ollama import chat
 
-from config import settings
 from llm.base import BaseProvider
 
 
 class OllamaProvider(BaseProvider):
 
-    def ask(self, system_prompt: str, user_prompt: str) -> str:
+    def ask(
+        self,
+        model: str,
+        system_prompt: str,
+        user_prompt: str,
+        ) -> str:
 
         try:
-
             response = chat(
-                model=settings.default_model,
+                model=model,
                 messages=[
                     {
                         "role": "system",

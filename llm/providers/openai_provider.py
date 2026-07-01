@@ -4,15 +4,21 @@ from config import settings
 from llm.base import BaseProvider
 
 
-class OpenAIProvider:    
+class OpenAIProvider(BaseProvider):    
 
     def __init__(self):
         self.client = OpenAI(api_key=settings.openai_api_key)
 
-    def ask(self, system_prompt: str, user_prompt: str):
+    def ask(
+        self,
+        model: str,
+        system_prompt: str, 
+        user_prompt: str,
+    ) -> str:
+        
         try:
             response = self.client.chat.completions.create(
-                model=settings.default_model,
+                model=model,
                 messages=[
                     {
                         "role": "system",

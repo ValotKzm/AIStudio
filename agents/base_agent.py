@@ -1,5 +1,5 @@
 from pathlib import Path
-from llm.factory import ask
+from llm.registry import get_provider
 
 class BaseAgent:
     
@@ -17,9 +17,9 @@ class BaseAgent:
         self.model = model
 
     def run(self, task):
-
-        return ask(
+        provider = get_provider(self.provider)
+        return provider.ask(
+            self.model,
             self.system_prompt,
             task
         )
-        

@@ -9,11 +9,11 @@ PROVIDERS = {
     "ollama": OllamaProvider(),
 }
 
-def ask(system_prompt: str, user_prompt: str) -> str:
+def get_provider(name: str) -> str:
 
-    provider = PROVIDERS.get(settings.default_provider)
+    provider = PROVIDERS.get(name)
 
     if provider is None:
         raise ValueError(f"Unknown LLM provider: {settings.default_provider}")
     
-    return provider.ask(system_prompt, user_prompt)
+    return provider
