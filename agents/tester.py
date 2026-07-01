@@ -3,6 +3,7 @@ from config import settings
 
 
 class Tester(BaseAgent):
+    NAME = "Tester"
 
     def __init__(
         self,

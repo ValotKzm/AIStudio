@@ -11,6 +11,4 @@ workflow = Workflow([
 
 task = input("What would you like to do? ")
 
-result = workflow.run(task)
-
-print(result)
+result = workflow.run(task, verbose=True)

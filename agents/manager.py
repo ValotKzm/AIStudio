@@ -3,7 +3,8 @@ from config import settings
 
 
 class Manager(BaseAgent):
-
+    NAME = "Manager"
+    
     def __init__(
         self, 
         provider: str = settings.default_provider, 
