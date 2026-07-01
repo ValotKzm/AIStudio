@@ -1,6 +1,16 @@
 from .base_agent import BaseAgent
+from config import settings
 
 
 class Manager(BaseAgent):
-    def __init__(self):
-        super().__init__("prompts/manager.txt")
+
+    def __init__(
+        self, 
+        provider: str = settings.default_provider, 
+        model: str = settings.default_model,
+    ):
+        super().__init__(
+            "prompts/manager.txt",
+            provider,
+            model,
+        )

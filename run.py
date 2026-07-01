@@ -2,8 +2,8 @@ from agents.developer import Developer
 from agents.manager import Manager
 from agents.tester import Tester
 
-developer = Developer()
 manager = Manager()
+developer = Developer()
 tester = Tester()
 
 task = input("What would you like to do? ")
