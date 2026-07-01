@@ -1,6 +1,6 @@
 from ollama import chat
 
-from config import MODEL
+from config import settings
 from llm.base import BaseProvider
 
 
@@ -11,7 +11,7 @@ class OllamaProvider(BaseProvider):
         try:
 
             response = chat(
-                model=MODEL,
+                model=settings.default_model,
                 messages=[
                     {
                         "role": "system",

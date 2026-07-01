@@ -1,20 +1,22 @@
+from dataclasses import dataclass
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
 # LLM configuration
-LLM_PROVIDER = os.getenv("LLM_PROVIDER")
-MODEL = os.getenv("MODEL")
 
-# OpenAI configuration
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+@dataclass(frozen=True)
+class Settings:
+    openai_api_key: str | None
+    default_provider: str
+    default_model: str
 
 
-# Configuration validation
-if LLM_PROVIDER is None:
-    raise ValueError("LLM_PROVIDER is missing from the .env file.")
 
-if MODEL is None:
-    raise ValueError("MODEL is missing from the .env file.")
-
+# LLM settings
+settings = Settings(
+    openai_api_key=os.getenv("OPENAI_API_KEY"),
+    default_provider=os.getenv("LLM_PROVIDER", "ollama"),
+    default_model=os.getenv("MODEL", "qwen3:8b"),
+)
