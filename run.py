@@ -1,25 +1,16 @@
 from agents.developer import Developer
 from agents.manager import Manager
 from agents.tester import Tester
+from workflow import Workflow
 
-manager = Manager()
-developer = Developer()
-tester = Tester()
+workflow = Workflow([
+    Manager(),
+    Developer(),
+    Tester(),
+])
 
 task = input("What would you like to do? ")
 
-print("\n--- MANAGER ---\n")
-plan = manager.run(task)
-print(plan)
+result = workflow.run(task)
 
-if plan == "The AI could not generate a response.":
-    print("\nStopping workflow.")
-    exit()
-
-print("\n--- DEVELOPER ---\n")
-code = developer.run(plan)
-print(code)
-
-print("\n--- TESTER ---\n")
-review = tester.run(code)
-print(review)
+print(result)
