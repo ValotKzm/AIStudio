@@ -14,9 +14,10 @@ class Workflow:
             if verbose:
                 print(f"\n--- {agent.NAME.upper()} ---\n")
 
-            agent.run(task)
+            previous_result = task.result
 
-            if verbose:
+            agent.run(task)
+            if verbose and task.result != previous_result:
                 print(task.result)
 
         return task
