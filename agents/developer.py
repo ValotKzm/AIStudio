@@ -1,8 +1,8 @@
-from .base_agent import BaseAgent
+from .llm_agent import LLMAgent
 from config import settings
 
 
-class Developer(BaseAgent):
+class Developer(LLMAgent):
     NAME = "Developer"
 
     def __init__(

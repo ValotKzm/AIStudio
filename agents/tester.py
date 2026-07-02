@@ -1,8 +1,8 @@
-from .base_agent import BaseAgent
+from .llm_agent import LLMAgent
 from config import settings
 
 
-class Tester(BaseAgent):
+class Tester(LLMAgent):
     NAME = "Tester"
 
     def __init__(

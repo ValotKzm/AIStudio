@@ -1,9 +1,10 @@
 from pathlib import Path
 
+from agents.agent import Agent
 from llm.registry import get_provider
 from models.task import Task
 
-class BaseAgent:
+class LLMAgent(Agent):
     
     def __init__(
             self,
