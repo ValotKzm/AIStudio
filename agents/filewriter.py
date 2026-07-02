@@ -18,7 +18,7 @@ class FileWriter(Agent):
             print("No files found to write.")
             return
 
-        self._write_files(files)
+        self._write_files(files, task)
 
     def _extract_files(self, text: str) -> list[tuple[str, str]]:
 
@@ -43,7 +43,11 @@ class FileWriter(Agent):
 
         return files
 
-    def _write_files(self, files: list[tuple[str, str]]):
+    def _write_files(
+        self,
+        files: list[tuple[str, str]],
+        task: Task,
+    ):
 
         self.WORKSPACE.mkdir(exist_ok=True)
 
@@ -51,9 +55,12 @@ class FileWriter(Agent):
 
             filepath = self.WORKSPACE / filename
 
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+
             filepath.write_text(
                 content,
                 encoding="utf-8",
             )
 
+            task.files.append(filepath)
             print(f"Created: {filepath}")
