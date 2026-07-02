@@ -1,4 +1,5 @@
 from .llm_agent import LLMAgent
+from models.task import Task
 from config import settings
 
 
@@ -15,3 +16,19 @@ class Tester(LLMAgent):
             provider,
             model,
         )
+
+    def build_prompt(self, task: Task) -> str:
+
+        parts = []
+
+        for file in task.files:
+            
+            parts.append(f"FILE: {file.name}\n")
+            content = file.read_text(
+            encoding="utf-8",
+            )
+
+            parts.append(content)
+
+        return "\n\n".join(parts)
+    
