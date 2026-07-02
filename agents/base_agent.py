@@ -1,5 +1,7 @@
 from pathlib import Path
+
 from llm.registry import get_provider
+from models.task import Task
 
 class BaseAgent:
     
@@ -16,10 +18,11 @@ class BaseAgent:
         self.provider = provider
         self.model = model
 
-    def run(self, task):
+    def run(self, task: Task):
         provider = get_provider(self.provider)
-        return provider.ask(
+
+        task.result = provider.ask(
             self.model,
             self.system_prompt,
-            task
+            task.result or task.prompt,
         )

@@ -1,17 +1,23 @@
+from models.task import Task
+
 class Workflow:
 
     def __init__(self, agents):
         self.agents = agents
 
-    def run(self, task, verbose=False):
+    def run(self, prompt: str, verbose: bool = False):
 
-        result = task
+        task = Task(prompt=prompt)
 
         for agent in self.agents:
-            print(f"\n--- {agent.NAME.upper()} ---\n")
 
-            result= agent.run(result)
+            if verbose:
+                print(f"\n--- {agent.NAME.upper()} ---\n")
 
-            print(result)
+            agent.run(task)
 
-        return result
+            if verbose:
+                print(task.result)
+
+        return task
+    
