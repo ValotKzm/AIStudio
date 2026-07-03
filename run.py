@@ -9,8 +9,8 @@ workflow = Workflow([
     Manager(),
     Developer(),
     FileWriter(),
-    PythonRunner(),
     Tester(),
+    PythonRunner(),
 ])
 
 task = input("What would you like to do? ")
