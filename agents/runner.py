@@ -6,6 +6,8 @@ from models.task import Task
 
 class Runner(Agent):
 
+    NAME = "Runner"
+
     @abstractmethod
     def execute(self, task: Task):
         pass
