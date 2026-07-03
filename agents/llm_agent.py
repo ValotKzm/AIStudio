@@ -19,11 +19,17 @@ class LLMAgent(Agent):
         self.provider = provider
         self.model = model
 
+    def build_prompt(self, task: Task) -> str:
+        
+        return task.result or task.prompt
+
     def run(self, task: Task):
         provider = get_provider(self.provider)
+
+        prompt = self.build_prompt(task)
 
         task.result = provider.ask(
             self.model,
             self.system_prompt,
-            task.result or task.prompt,
+            prompt,
         )
