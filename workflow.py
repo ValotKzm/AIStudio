@@ -11,6 +11,9 @@ class Workflow:
 
         for agent in self.agents:
 
+            if not agent.should_run(task):
+                continue
+
             if verbose:
                 print(f"\n--- {agent.NAME.upper()} ---\n")
 

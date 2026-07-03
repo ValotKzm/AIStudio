@@ -17,6 +17,9 @@ class Tester(LLMAgent):
             model,
         )
 
+    def should_run(self, task: Task) -> bool:
+        return bool(task.files)
+
     def build_prompt(self, task: Task) -> str:
 
         parts = []
