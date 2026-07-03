@@ -76,7 +76,7 @@ AIStudio/
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ValotKzm/AIStudio.git
 cd AIStudio
 ```
 
