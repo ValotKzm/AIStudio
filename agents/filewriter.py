@@ -7,10 +7,11 @@ from models.task import Task
 class FileWriter(Agent):
 
     NAME = "File Writer"
-
     WORKSPACE = Path("workspace")
 
     def run(self, task: Task):
+
+        task.metadata["project_type"] = self._extract_project_type(task.result)
 
         files = self._extract_files(task.result)
 
@@ -20,6 +21,16 @@ class FileWriter(Agent):
 
         self._write_files(files, task)
 
+    def _extract_project_type(self, text: str) -> str:
+
+        for line in text.splitlines():
+            line = line.strip()
+
+            if line.startswith("PROJECT:"):
+                return line.replace("PROJECT:", "").strip()
+
+        return "unknown"
+
     def _extract_files(self, text: str) -> list[tuple[str, str]]:
 
         files = []
@@ -28,16 +39,22 @@ class FileWriter(Agent):
 
             lines = block.strip().splitlines()
 
-            filename = lines[0].strip()
+            if not lines:
+                continue
 
-            start = next(
-                i for i, line in enumerate(lines)
-                if line.startswith("```")
-            ) + 1
+            filename = lines[0].replace("FILE:", "").strip()
 
-            end = len(lines) - 1
+            code_start = None
 
-            code = "\n".join(lines[start:end])
+            for i, line in enumerate(lines):
+                if line.strip().startswith("```"):
+                    code_start = i
+                    break
+
+            if code_start is None:
+                code = "\n".join(lines[1:])
+            else:
+                code = "\n".join(lines[code_start + 1 : -1])
 
             files.append((filename, code))
 
@@ -63,4 +80,5 @@ class FileWriter(Agent):
             )
 
             task.files.append(filepath)
+
             print(f"Created: {filepath}")
