@@ -1,3 +1,5 @@
+import subprocess
+import sys
 from pathlib import Path
 
 from agents.runner import Runner
@@ -20,6 +22,34 @@ class PythonRunner(Runner):
             return
 
         print(f"Running {entry_point.name}")
+
+        command = [
+            sys.executable,
+            str(entry_point),
+        ]
+
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            )
+
+        task.metadata["return_code"] = result.returncode
+        task.metadata["stdout"] = result.stdout
+        task.metadata["stderr"] = result.stderr
+
+        if result.returncode == 0:
+            print("Execution succeeded.")
+        else:
+            print("Execution failed.")
+
+        if result.stdout:
+            print("\n--- STDOUT ---")
+            print(result.stdout)
+
+        if result.stderr:
+            print("\n--- STDERR ---")
+            print(result.stderr)
 
     def _find_entry_point(self, task: Task) -> Path | None:
 
