@@ -58,3 +58,9 @@ class Fixer(LLMAgent):
         )
 
         return prompt
+    
+    def run(self, task: Task):
+
+        super().run(task)
+
+        task.metadata["needs_rewrite"] = True
