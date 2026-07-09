@@ -1,4 +1,6 @@
 from models.task import Task
+from agents.filewriter import FileWriter
+from agents.runners.registry import get_runner
 
 class Workflow:
 
@@ -22,6 +24,19 @@ class Workflow:
             agent.run(task)
             if verbose and task.result != previous_result:
                 print(task.result)
+
+            if task.metadata.get("needs_rewrite"):
+
+                task.metadata["repair_attempts"] += 1
+            
+                task.metadata["needs_rewrite"] = False
+
+                FileWriter().run(task)
+
+                runner = get_runner(task.metadata.get("project_type"))
+
+                if runner:
+                    runner.run(task)
 
         return task
     

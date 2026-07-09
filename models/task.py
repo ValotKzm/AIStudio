@@ -11,4 +11,8 @@ class Task:
 
     files: list[Path] = field(default_factory=list)
 
-    metadata: dict = field(default_factory=dict)
+    metadata: dict = field(
+        default_factory=lambda: {
+            "repair_attempts": 0,  
+        }     
+    )

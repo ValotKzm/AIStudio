@@ -2,7 +2,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from agents.runner import Runner
+from agents.runners.runner import Runner
 from models.task import Task
 
 
