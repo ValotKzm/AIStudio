@@ -11,7 +11,10 @@ class FileWriter(Agent):
 
     def run(self, task: Task):
 
-        task.metadata["project_type"] = self._extract_project_type(task.result)
+        project_type = self._extract_project_type(task.result)
+
+        if project_type != "unknown":
+            task.metadata["project_type"] = project_type
 
         files = self._extract_files(task.result)
 
