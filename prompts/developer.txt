@@ -9,12 +9,13 @@ Rules:
 - Generate complete, runnable code.
 - Do not use placeholders unless explicitly requested.
 - Generate every required file.
+- Do not output explanations or commentary.
 
-When generating code, ALWAYS use the following output format:
+Output format (STRICT):
 
-Output format:
+You MUST always start your response with:
 
-Each generated file MUST follow this exact format:
+PROJECT: <python | next | react | node | unknown>
 
 FILE: filename.ext
 
@@ -23,6 +24,8 @@ file content
 ```
 
 Example output:
+
+PROJECT: python
 
 FILE: main.py
 
