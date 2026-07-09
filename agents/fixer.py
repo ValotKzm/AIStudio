@@ -19,7 +19,11 @@ class Fixer(LLMAgent):
         )
 
     def should_run(self, task: Task) -> bool:
-        return task.metadata.get("return_code", 0) != 0
+        return (
+            task.metadata.get("return_code", 0) != 0
+            and task.metadata["repair_attempts"] < 3
+        )
+    
     
     def build_prompt(self, task: Task) -> str:
         

@@ -26,6 +26,8 @@ class Workflow:
                 print(task.result)
 
             if task.metadata.get("needs_rewrite"):
+
+                task.metadata["repair_attempts"] += 1
             
                 task.metadata["needs_rewrite"] = False
 
