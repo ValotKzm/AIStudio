@@ -3,6 +3,7 @@ from agents.manager import Manager
 from agents.tester import Tester
 from agents.filewriter import FileWriter
 from agents.runners.python_runner import PythonRunner
+from agents.runners.node_runner import NodeRunner
 from agents.fixer import Fixer
 from workflow import Workflow
 
@@ -12,6 +13,7 @@ workflow = Workflow([
     FileWriter(),
     Tester(),
     PythonRunner(),
+    NodeRunner(),
     Fixer(),
 ])
 
