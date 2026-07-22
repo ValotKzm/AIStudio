@@ -2,8 +2,8 @@ from agents.runners.python_runner import PythonRunner
 from agents.runners.node_runner import NodeRunner
 
 RUNNERS = {
-    "python": PythonRunner(),
-    "node": NodeRunner(),
+    PythonRunner.PROJECT_TYPE: PythonRunner(),
+    NodeRunner.PROJECT_TYPE: NodeRunner(),
 }
 
 
