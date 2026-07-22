@@ -1,9 +1,15 @@
 from agents.runners.python_runner import PythonRunner
 from agents.runners.node_runner import NodeRunner
 
+
+RUNNER_CLASSES = (
+    PythonRunner,
+    NodeRunner,
+)
+
 RUNNERS = {
-    PythonRunner.PROJECT_TYPE: PythonRunner(),
-    NodeRunner.PROJECT_TYPE: NodeRunner(),
+    runner.PROJECT_TYPE: runner()
+    for runner in RUNNER_CLASSES
 }
 
 
